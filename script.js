@@ -27,6 +27,10 @@ function checkLogo(isLightMode) {
     }
 }
 
+logo.addEventListener("click", () => {
+    window.location.href = "./";
+});
+
 function detectPlatform(url) {
     const platformIcon = document.getElementById("platform-icon");
     const validationMsg = document.getElementById("url-validation");
