@@ -157,7 +157,7 @@ function convertMedia() {
 
     convertBtn.disabled = true;
     convertBtn.innerHTML =
-        '<span>Converting...</span><i class="fas fa-spinner fa-spin"></i>';
+        '<span>Converting</span><i class="fas fa-spinner fa-spin"></i>';
     progressContainer.style.display = "block";
 
     let progress = 0;
@@ -173,7 +173,7 @@ function convertMedia() {
             setTimeout(() => {
                 convertBtn.disabled = false;
                 convertBtn.innerHTML =
-                    '<span>Convert Now</span><i class="fas fa-bolt"></i>';
+                    '<span>Convert</span>';
                 progressContainer.style.display = "none";
                 progressBar.style.width = "0%";
                 progressPercent.textContent = "0%";
