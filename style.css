@@ -248,6 +248,7 @@ select:focus {
 }
 
 #CNVMP3Logo {
+  cursor: pointer;
   margin-top: 20px;
   width: 100%;
   height: auto;
