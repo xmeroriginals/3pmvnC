@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CnvMP3 | Ad-Free</title>
+    <link
+      rel="icon"
+      href="https://storage.ko-fi.com/cdn/useruploads/b58e1a16-3acf-47eb-9723-75c35bbfa071_bcd1d64d-9015-4a2e-9b5d-a333341bd708.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style src="style.css"></style>
+  </head>
+  <body>
+    <div class="main-container">
+      <header class="header">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <img
+          id="CNVMP3Logo"
+          src="https://cnvmp3.com/img/cnvmp3-black.png"
+          alt="CnvMP3 Logo"
+        />
+        <div class="RedditBtn-Text">
+          <h1 id="RedditBtn-Mtxt">Join us on Reddit</h1>
+          <div class="reddit-btn-container">
+            <a
+              href="https://www.reddit.com/r/cnvmp3/"
+              class="reddit-btn"
+              target="_blank"
+            >
+              <i class="fab fa-reddit"></i>
+              <span>r/CnvMP3</span>
+            </a>
+          </div>
+        </div>
+        <div class="donation-notes glass-card">
+          <div class="note">
+            <i class="fas fa-bookmark" style="color: var(--neon-orange)"></i>
+            <span
+              >Bookmark the website
+              <a href="#"
+                ><span style="text-decoration: underline; font-weight: 600">
+                  CnvMP3</span
+                ></a
+              >, and please
+              <a href="https://ko-fi.com/cnvmp3" target="_blank"
+                ><span
+                  style="
+                    text-decoration: underline;
+                    font-weight: 600;
+                    color: #ff5f5f !important;
+                  "
+                  >Buy me a Coffee</span
+                ></a
+              >
+              so we can keep this website ad-free</span
+            >
+          </div>
+        </div>
+      </header>
+      <div class="glass-card">
+        <div class="input-group">
+          <label for="url">Media URL</label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="url"
+              class="input-field"
+              placeholder="https://youtube.com/watch?v=..."
+              oninput="detectPlatform(this.value)"
+            />
+            <div id="platform-icon" class="platform-icon">
+              <i class="fab fa-youtube"></i>
+            </div>
+          </div>
+          <div id="url-validation" class="validation-message"></div>
+        </div>
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="format">Format</label>
+            <div class="select-wrapper">
+              <select id="format">
+                <option value="mp3">MP3</option>
+                <option value="mp4">MP4</option>
+              </select>
+              <div class="select-arrow">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+          <div class="input-group quality-control" id="quality-control">
+            <label for="bitrate">Quality</label>
+            <div class="select-wrapper">
+              <select id="bitrate">
+                <option value="96">96 kbps</option>
+                <option value="128">128 kbps</option>
+                <option value="256" selected>256 kbps</option>
+                <option value="320">320 kbps</option>
+              </select>
+              <div class="select-arrow">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          id="convert-btn"
+          class="btn btn-primary"
+          onclick="convertMedia()"
+        >
+          <span>Convert</span>
+        </button>
+        <div id="progress-container" class="progress-container">
+          <div class="progress-info">
+            <span>Converting...</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="goal-overlay glass-card" id="goal-overlay-app">
+        <div style="width: 100%">
+          <div class="goal-title">
+            <img
+              src="https://storage.ko-fi.com/cdn/logomarkLogo.png"
+              width="33"
+            />
+            <span>Server costs for May</span>
+          </div>
+          <div class="goal-progress">
+            <div class="goal-progress-bar" id="kofi-progress-bar"></div>
+          </div>
+        </div>
+        <div class="goal-percentage" id="kofi-percentage">0%</div>
+      </div>
+      <div class="glass-card">
+        <h2 style="color: var(--neon-orange)">How to Convert</h2>
+        <div class="instructions-grid">
+          <div class="instruction-card">
+            <div class="instruction-icon" style="color: var(--neon-orange)">
+              <i class="fas fa-link"></i>
+            </div>
+            <h3 class="instruction-title">Copy URL</h3>
+            <p class="instruction-desc">Copy link from YouTube, TikTok, etc.</p>
+          </div>
+          <div class="instruction-card">
+            <div class="instruction-icon" style="color: var(--neon-orange)">
+              <i class="fas fa-cog"></i>
+            </div>
+            <h3 class="instruction-title">Select Format</h3>
+            <p class="instruction-desc">Choose MP3 or MP4 and quality</p>
+          </div>
+          <div class="instruction-card">
+            <div class="instruction-icon" style="color: var(--neon-orange)">
+              <i class="fas fa-download"></i>
+            </div>
+            <h3 class="instruction-title">Download</h3>
+            <p class="instruction-desc">Get your converted file instantly</p>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card">
+        <h2 style="color: var(--neon-orange)">Supported Platforms</h2>
+        <div class="platforms-grid">
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #ff0000">
+              <i class="fab fa-youtube"></i>
+            </div>
+            <span class="platform-name">YouTube</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo">
+              <i class="fab fa-tiktok"></i>
+            </div>
+            <span class="platform-name">TikTok</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #ff5700">
+              <i class="fab fa-reddit"></i>
+            </div>
+            <span class="platform-name">Reddit</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #e1306c">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <span class="platform-name">Instagram</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #1877f2">
+              <i class="fab fa-facebook"></i>
+            </div>
+            <span class="platform-name">Facebook</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #9146ff">
+              <i class="fab fa-twitch"></i>
+            </div>
+            <span class="platform-name">Twitch</span>
+          </div>
+          <div class="platform-card">
+            <div class="platform-logo" style="color: #1da1f2">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <span class="platform-name">Twitter (X)</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <footer>
+      <p id="footer-Copyright">© 2025 CnvMP3 - YouTube to MP3 Converter</p>
+      <div class="footer-links">
+        <a href="#">Contact</a>
+        <a href="#">Copyright Claims</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </footer>
+
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
